@@ -11,7 +11,7 @@ function validateCustomer(customer) {
   return Joi.validate(customer, schema);
 }
 
-const customerSchema = new mongoose.schema({
+const customerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,

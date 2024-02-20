@@ -5,8 +5,10 @@ const customers = require("./routes/customers");
 const express = require("express");
 const app = express();
 
+//localhost:27017/
+
 mongoose
-  .connect("mongodb://localhost/vidly")
+  .connect("mongodb://localhost:27017/vidly")
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Couldn't connect to MongoDb", err));
 
