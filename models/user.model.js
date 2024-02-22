@@ -1,7 +1,9 @@
+const jwt = require("jsonwebtoken");
+const config = require("config");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const genreSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -22,9 +24,18 @@ const genreSchema = new mongoose.Schema({
     maxLength: 1024,
     unique: true,
   },
+  isAdmin: Boolean,
 });
 
-const User = mongoose.model("user", genreSchema);
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+    config.get("jwtPrivateKey")
+  );
+  return token;
+};
+
+const User = mongoose.model("user", userSchema);
 
 function validateUser(user) {
   const schema = {
