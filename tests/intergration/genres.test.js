@@ -46,4 +46,13 @@ describe("/Genres", () => {
     //   expect(res.status).toBe(404);
     // });
   });
+
+  describe("POST /", () => {
+    test("should return 401 if client is not logged in", async () => {
+      const res = await request(server)
+        .post("/genres")
+        .send({ name: "genre1" });
+      expect(res.status).toBe(401);
+    });
+  });
 });
