@@ -1,8 +1,9 @@
-const { asyncMiddleware } = require("../middleware/async");
+const validateObjectId = require("../middleware/validateObjectId");
 const admin = require("../middleware/admin");
 const auth = require("../middleware/auth");
 const { Genre, validateGenre } = require("../models/genres.model");
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -10,7 +11,7 @@ router.get("/", async (req, res, next) => {
   res.send(genres);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
   const genre = await Genre.findById(req.params.id);
 
   if (!genre)

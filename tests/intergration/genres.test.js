@@ -32,7 +32,18 @@ describe("/Genres", () => {
       await genre.save();
       const res = await request(server).get("/genres/" + genre._id);
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty("name", "genre1");
+      expect(res.body).toHaveProperty("name", genre.name);
     });
+
+    test("should return 404 if a valid id is passed", async () => {
+      const res = await request(server).get("/genres/1");
+      expect(res.status).toBe(404);
+    });
+    // test("should return 404 if no genre with the given id exists", async () => {
+    //   const id = mongoose.Types.ObjectId();
+    //   const res = await request(server).get("/api/genres/" + id);
+
+    //   expect(res.status).toBe(404);
+    // });
   });
 });
