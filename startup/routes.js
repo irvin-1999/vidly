@@ -5,6 +5,7 @@ const movies = require("../routes/movies");
 const rentals = require("../routes/rentals");
 const users = require("../routes/user");
 const auth = require("../routes/auth");
+const returns = require("../routes/returns");
 const error = require("../middleware/error");
 
 module.exports = function (app) {
@@ -15,5 +16,6 @@ module.exports = function (app) {
   app.use("/rentals", rentals);
   app.use("/users", users);
   app.use("/auth", auth);
+  app.use("/returns", returns);
   app.use(error);
 };
