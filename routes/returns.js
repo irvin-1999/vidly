@@ -38,7 +38,7 @@ router.post("/returns", auth, async (req, res, next) => {
     }
   );
 
-  return res.status(200).send();
+  return res.status(200).send(rental);
 });
 
 module.exports = router;
